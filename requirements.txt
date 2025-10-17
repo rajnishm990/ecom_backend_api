@@ -1,0 +1,27 @@
+# Core Django stuff
+Django==4.2.7
+djangorestframework==3.14.0
+
+# Authentication - JWT tokens
+djangorestframework-simplejwt==5.3.0
+
+# Database
+psycopg2-binary==2.9.9
+
+# Redis for cacheing 
+redis==5.0.1
+django-redis==5.4.0
+
+# WebSocket support for real-time notifs
+channels==4.0.0
+channels-redis==4.1.0
+daphne==4.0.0
+
+# Environment variables
+python-decouple==3.8
+
+# CORS headers (might need this for frontend later)
+django-cors-headers==4.3.1
+
+# Filtering and pagination
+django-filter==23.5
