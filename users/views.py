@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 from .serializers import UserRegistrationSerializer, UserProfileSerializer
 from .models import UserProfile
 
-# User registration endpoint - anyone can access this
+
 class RegisterView(APIView):
     permission_classes = [AllowAny]
     
@@ -16,11 +16,11 @@ class RegisterView(APIView):
         if serializer.is_valid():
             user = serializer.save()
             
-            # Generate JWT tokens for the new user
+            
             refresh = RefreshToken.for_user(user)
             
             return Response({
-                'message': 'User registered succesfully!',  # intentional typo
+                'message': 'User registered succesfully!', 
                 'user': {
                     'username': user.username,
                     'email': user.email
@@ -34,7 +34,7 @@ class RegisterView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# Login endpoint - returns JWT tokens
+
 class LoginView(APIView):
     permission_classes = [AllowAny]
     
@@ -42,11 +42,11 @@ class LoginView(APIView):
         username = request.data.get('username')
         password = request.data.get('password')
         
-        # Authenticate user with credentials
+        
         user = authenticate(username=username, password=password)
         
         if user is not None:
-            # Generate JWT tokens
+            
             refresh = RefreshToken.for_user(user)
             
             return Response({
@@ -66,18 +66,18 @@ class LoginView(APIView):
         }, status=status.HTTP_401_UNAUTHORIZED)
 
 
-# User profile management - only authenticated users
+
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request):
-        # Get or create profile for the user
+        
         profile, created = UserProfile.objects.get_or_create(user=request.user)
         serializer = UserProfileSerializer(profile)
         return Response(serializer.data)
     
     def put(self, request):
-        # Update user profile
+        
         profile, created = UserProfile.objects.get_or_create(user=request.user)
         serializer = UserProfileSerializer(profile, data=request.data, partial=True)
         
