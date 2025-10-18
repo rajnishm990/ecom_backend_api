@@ -160,7 +160,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     def _invalidate_product_cache(self):
         """Helper method to clear product caches"""
         # Delete all keys that start with 'products_list'
-        keys_pattern = 'ecommerce:products_list*'
+        #keys_pattern = 'ecommerce:products_list*' [note to self ]
         # Note: Again I am keeping it simple . definitely not apt for production 
         cache.delete_pattern('products_list*')
     
