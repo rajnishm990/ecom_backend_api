@@ -22,11 +22,11 @@ from orders.models import Cart, CartItem, Order, OrderItem
 from users.models import UserProfile
 
 print("=" * 60)
-print("🌱 Starting Database Seeding...")
+print("Starting Database Seeding...")
 print("=" * 60)
 
 # Create Superuser
-print("\n👤 Creating superuser...")
+print("\nCreating superuser...")
 if not User.objects.filter(username='admin').exists():
     admin = User.objects.create_superuser(
         username='admin',
@@ -35,13 +35,13 @@ if not User.objects.filter(username='admin').exists():
         first_name='Admin',
         last_name='User'
     )
-    print(f"✓ Superuser created: {admin.username}")
+    print(f" Superuser created: {admin.username}")
 else:
     admin = User.objects.get(username='admin')
-    print(f"✓ Superuser already exists: {admin.username}")
+    print(f" Superuser already exists: {admin.username}")
 
 # Create Regular Users
-print("\n👥 Creating regular users...")
+print("\n Creating regular users...")
 users_data = [
     {'username': 'john_doe', 'email': 'john@example.com', 'password': 'pass123', 'first_name': 'John', 'last_name': 'Doe'},
     {'username': 'jane_smith', 'email': 'jane@example.com', 'password': 'pass123', 'first_name': 'Jane', 'last_name': 'Smith'},
@@ -80,10 +80,10 @@ for user_data in users_data:
     )
     created_users.append(user)
 
-print(f"✓ Total users: {len(created_users)}")
+print(f"Total users: {len(created_users)}")
 
 # Create Categories
-print("\n📂 Creating categories...")
+print("\n Creating categories...")
 categories_data = [
     {'name': 'Electronics', 'description': 'Electronic devices, computers, phones, and accessories'},
     {'name': 'Clothing', 'description': 'Fashion, apparel, shoes, and accessories'},
@@ -102,13 +102,13 @@ for cat_data in categories_data:
         defaults={'description': cat_data['description']}
     )
     if created:
-        print(f"✓ Category created: {category.name}")
+        print(f" Category created: {category.name}")
     else:
         print(f"  Category exists: {category.name}")
     categories.append(category)
 
 # Create Products
-print("\n📦 Creating products...")
+print("\n Creating products...")
 products_data = [
     # Electronics
     {'name': 'iPhone 15 Pro Max', 'description': 'Latest Apple smartphone with A17 Pro chip, titanium design', 'price': 1199.99, 'stock': 45, 'category': 'Electronics'},
@@ -173,15 +173,15 @@ for prod_data in products_data:
         }
     )
     if created:
-        print(f"✓ Product created: {product.name}")
+        print(f" Product created: {product.name}")
     else:
         print(f"  Product exists: {product.name}")
     products.append(product)
 
-print(f"✓ Total products: {len(products)}")
+print(f" Total products: {len(products)}")
 
 # Create Shopping Carts with Items
-print("\n🛒 Creating shopping carts...")
+print("\n Creating shopping carts...")
 for i, user in enumerate(created_users[:3]):  # First 3 users get carts
     cart, created = Cart.objects.get_or_create(user=user)
     
@@ -201,7 +201,7 @@ for i, user in enumerate(created_users[:3]):  # First 3 users get carts
                 print(f"  ✓ Added {quantity}x {product.name} to {user.username}'s cart")
 
 # Create Orders
-print("\n📋 Creating sample orders...")
+print("\n Creating sample orders...")
 for i, user in enumerate(created_users[:4]):  # First 4 users get orders
     # Create 1-2 orders per user
     num_orders = random.randint(1, 2)
@@ -237,19 +237,19 @@ for i, user in enumerate(created_users[:4]):  # First 4 users get orders
         print(f"  ✓ Order #{order.id} created for {user.username} (${total:.2f})")
 
 print("\n" + "=" * 60)
-print("✅ Database seeding completed!")
+print(" Database seeding completed!")
 print("=" * 60)
 
 # Print summary
-print("\n📊 Summary:")
-print(f"  👤 Users: {User.objects.count()}")
-print(f"  📂 Categories: {Category.objects.count()}")
-print(f"  📦 Products: {Product.objects.count()}")
-print(f"  🛒 Active Carts: {Cart.objects.count()}")
-print(f"  📋 Orders: {Order.objects.count()}")
-print(f"  📝 Order Items: {OrderItem.objects.count()}")
+print("\n Summary:")
+print(f"   Users: {User.objects.count()}")
+print(f"   Categories: {Category.objects.count()}")
+print(f"   Products: {Product.objects.count()}")
+print(f"   Active Carts: {Cart.objects.count()}")
+print(f"   Orders: {Order.objects.count()}")
+print(f"   Order Items: {OrderItem.objects.count()}")
 
-print("\n🎯 Test Accounts:")
+print("\n Test Accounts:")
 print("  Admin:")
 print("    username: admin")
 print("    password: admin123")
