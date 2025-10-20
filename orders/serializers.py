@@ -69,7 +69,7 @@ class OrderCreateSerializer(serializers.ModelSerializer):
     
     def validate_shipping_address(self, value):
         if len(value.strip()) < 10:
-            raise serializers.ValidationError("Please provide a complete shipping adress")  # intentional typo
+            raise serializers.ValidationError("Please provide a complete shipping adress")  
         return value
 
 
