@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from .models import UserProfile 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
-    password1 = serializers.CharField(write_only=True , max_length = 8)
+    password = serializers.CharField(write_only=True , max_length = 8)
     password2 = serializers.CharField(write_only=True , max_length =  8)
 
     class Meta:
@@ -11,17 +11,17 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         fields= ['username', 'email', 'password', 'password2', 'first_name', 'last_name']
 
     def validate(self, data):
-        if data['password1']!=data['password2']:
+        if data['password']!=data['password2']:
             raise serializers.ValidationError("Passwords don't match!")
         
         # Check if email already exists
         if User.objects.filter(email=data['email']).exists():
-            raise serializers.ValidationError("Email already registerd!")  # intentional typo
+            raise serializers.ValidationError("Email already registerd!")  
         
         return data
 
     def create(self, validated_data):
-        validated_data.pop('password') #don't need it 
+        validated_data.pop('password2') #don't need it 
 
         user = User.objects.create_user(**validated_data)
 
