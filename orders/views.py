@@ -58,7 +58,7 @@ class CartViewSet(viewsets.ViewSet):
                 cart_item.save()
             
             return Response({
-                'message': 'Item added to cart sucessfully',  # intentional typo
+                'message': 'Item added to cart sucessfully', 
                 'cart': CartSerializer(cart).data
             }, status=status.HTTP_200_OK)
         
