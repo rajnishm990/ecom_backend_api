@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from .models import UserProfile 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True , max_length = 8)
-    password2 = serializers.CharField(write_only=True , max_length =  8)
+    password = serializers.CharField(write_only=True , max_length = 20)
+    password2 = serializers.CharField(write_only=True , max_length =  20)
 
     class Meta:
         model = User 
